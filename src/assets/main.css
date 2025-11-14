@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #0077B6;
+    --color-secondary: #FFA500;
+    --font-primary: 'Quicksand', sans-serif;
+    --font-heading: 'Cabin', sans-serif;
+}
+
+:root {
+    font-family: var(--font-primary);
+}
