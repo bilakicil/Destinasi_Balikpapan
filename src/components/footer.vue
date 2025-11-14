@@ -28,17 +28,19 @@ import { Facebook } from "lucide-vue-next";
             <ul class="text-body font-medium">
               <li class="mb-4">
                 <a
-                  href="https://flowbite.com/"
+                  href="https://tailwindcss.com/"
                   class="flex items-center gap-3 hover:underline"
                   ><Phone />+62 542 123 4567</a
                 >
               </li>
               <li>
                 <a
-                  href="https://tailwindcss.com/"
+                  href="https://www.google.com/maps?q=DISPORAPAR+Balikpapan"
+                  target="_blank"
                   class="flex items-center gap-3 hover:underline"
-                  ><MapPin />Balikpapan, Kalimantan Timur</a
                 >
+                  <MapPin /> Balikpapan, Kalimantan Timur
+                </a>
               </li>
             </ul>
           </div>
@@ -48,14 +50,12 @@ import { Facebook } from "lucide-vue-next";
             </h2>
             <ul class="text-body font-medium flex items-center gap-7">
               <li>
-                <a
-                  href="https://github.com/themesberg/flowbite"
-                  class="hover:underline"
+                <a href="https://www.instagram.com" class="hover:underline"
                   ><Instagram
                 /></a>
               </li>
               <li>
-                <a href="https://discord.gg/4eeurUVvTy" class="hover:underline"
+                <a href="https://www.facebook.com" class="hover:underline"
                   ><Facebook
                 /></a>
               </li>
