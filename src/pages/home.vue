@@ -1,7 +1,10 @@
 <script setup>
 import Hero from "../components/HeroHome.vue";
 import AboutCard from "../components/AboutCard.vue";
-import Footer from "@/components/footer.vue";
+import Footer from "@/components/Footer.vue";
+import CardDestinasi from "@/components/CardDestinasi.vue";
+import Button from "@/components/Button.vue";
+import { ArrowLeft } from "lucide-vue-next";
 </script>
 
 <template>
@@ -18,6 +21,16 @@ import Footer from "@/components/footer.vue";
     memukau anda dengan pesona wisatanya yang beragam.
   </p>
   <AboutCard />
+  <h2
+    class="text-3xl font-heading font-bold text-gray-800 mb-6 text-center mt-10"
+  >
+    <span class="text-primary">Destinasi Populer</span>
+  </h2>
+  <CardDestinasi :limit="3" />
+  <div class="text-center mb-20">
+    <Button content="Lihat Semua Destinasi" variant="primary" />
+  </div>
+  <!-- <Button variant="outline" content="Lihat Peta" icon="MapPin" iconPosition="right" /> -->
   <Footer />
 </template>
 

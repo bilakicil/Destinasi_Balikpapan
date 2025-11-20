@@ -1,7 +1,7 @@
 <script setup>
 import HeroKontak from "@/components/HeroKontak.vue";
 import FormInput from "@/components/FormInput.vue";
-import Footer from "@/components/footer.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>

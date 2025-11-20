@@ -66,7 +66,7 @@ import { Facebook } from "lucide-vue-next";
       <hr class="my-6 border-default sm:mx-auto lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between sm:gap-x-8">
         <span class="text-sm text-body sm:text-center"
-          >© 2023
+          >© 2025
           <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>.
           All Rights Reserved.
         </span>
