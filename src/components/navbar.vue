@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from "vue-router";
 
 const menus = [
   { name: "Home", link: "/" },
@@ -21,13 +21,15 @@ const menus = [
         <ul>
           <li class="flex gap-10">
             <RouterLink
-              class="text-sm hover:text-primary"
+              class="text-sm"
+              active-class="text-primary"
+              exact-active-class="text-primary font-semibold"
               v-for="menu in menus"
               :key="menu.name"
               :to="menu.link"
             >
               {{ menu.name }}
-          </RouterLink>
+            </RouterLink>
           </li>
         </ul>
       </nav>

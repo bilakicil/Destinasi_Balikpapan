@@ -1,6 +1,5 @@
 <script setup>
 import CardDestinasi from "@/components/CardDestinasi.vue";
-import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
@@ -39,5 +38,4 @@ import Footer from "@/components/Footer.vue";
   </p>
   <h2 />
   <CardDestinasi kategori="Kuliner" />
-  <Footer/>
 </template>

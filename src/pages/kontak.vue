@@ -1,7 +1,6 @@
 <script setup>
 import HeroKontak from "@/components/HeroKontak.vue";
 import FormInput from "@/components/FormInput.vue";
-import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
@@ -18,7 +17,6 @@ import Footer from "@/components/Footer.vue";
     ></iframe>
     <FormInput />
   </div>
-  <Footer />
 </template>
 
 <style scoped>

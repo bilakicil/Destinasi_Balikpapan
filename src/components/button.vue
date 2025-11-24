@@ -17,7 +17,7 @@ const props = defineProps({
   // props untuk ikon lucide
   icon: {
     type: String,
-    default: null, // contoh: "Search", "ArrowRight", "MapPin"
+    default: null, 
   },
 
   // posisi ikon 
@@ -42,6 +42,7 @@ const IconComponent = props.icon ? icons[props.icon] : null;
       variant === 'outline' ? 'border-2 border-primary text-primary hover:bg-primary/10' : 
       variant === 'secondary' ? 'text-primary hover:underline' : ''
     ]"
+    @click="$emit('click')"
   >
     <!-- Ikon di kiri -->
     <component

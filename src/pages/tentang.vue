@@ -1,5 +1,4 @@
 <script setup>
-import Footer from "@/components/Footer.vue";
 import CardTentang from "@/components/CardTentang.vue";
 </script>
 
@@ -17,5 +16,4 @@ import CardTentang from "@/components/CardTentang.vue";
     makanan khas yang memanjakan lidah.
   </p>
   <CardTentang class="mt-12 mb-16" />
-  <Footer />
 </template>

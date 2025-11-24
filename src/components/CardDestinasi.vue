@@ -1,5 +1,9 @@
 <script setup>
 import Button from "./Button.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 const props = defineProps({
   limit: {
     type: Number,
@@ -12,6 +16,7 @@ const props = defineProps({
 });
 const destinasi = [
   {
+    slug: "pantai-manggar",
     nama: "Pantai Manggar",
     kategori: "Pantai",
     lokasi: "Manggar, Balikpapan",
@@ -20,6 +25,7 @@ const destinasi = [
     gambar: "/aset/pantai_manggar.jpg",
   },
   {
+    slug: "hutan-mangrove",
     nama: "Hutan Mangrove",
     kategori: "Wisata Alam",
     lokasi: "Margomulyo, Balikpapan",
@@ -28,6 +34,7 @@ const destinasi = [
     gambar: "/aset/hutan_mangrove.png",
   },
   {
+    slug: "pasar-tumpah-pringgodani",
     nama: "Pasar Tumpah Pringgodani",
     kategori: "Kuliner",
     lokasi: "Teitip, Balikpapan",
@@ -36,6 +43,7 @@ const destinasi = [
     gambar: "/aset/pringgondani.jpeg",
   },
   {
+    slug: "wisata-meranti",
     nama: "Wisata Meranti ",
     kategori: "Wisata Alam",
     lokasi: "Karang Joang, Balikpapan",
@@ -44,6 +52,7 @@ const destinasi = [
     gambar: "/aset/wisata_meranti.webp",
   },
   {
+    slug: "bukit-kebo",
     nama: "Bukit Kebo ",
     kategori: "Wisata Alam",
     lokasi: "Manggar, Balikpapan",
@@ -52,6 +61,7 @@ const destinasi = [
     gambar: "/aset/bukit_kebo.jpeg",
   },
   {
+    slug: "pantai-seraya",
     nama: "Pantai Seraya",
     kategori: "Pantai",
     lokasi: "Sepinggan, Balikpapan",
@@ -60,6 +70,7 @@ const destinasi = [
     gambar: "/aset/pantai_seraya.jpg",
   },
   {
+    slug: "pantai-kilang-mandiri",
     nama: "Pantai Kilang Mandiri",
     kategori: "Pantai",
     lokasi: "Prapatan, Balikpapan",
@@ -68,6 +79,7 @@ const destinasi = [
     gambar: "/aset/pantai_kilang_mandiri.webp",
   },
   {
+    slug: "restoran-dandito",
     nama: "Restoran Dandito",
     kategori: "Kuliner",
     lokasi: "Gn. Bahagia, Balikpapan",
@@ -76,6 +88,7 @@ const destinasi = [
     gambar: "/aset/dandito.jpeg",
   },
   {
+    slug: "gulung-jenebora",
     nama: "Gulung Jenebora",
     kategori: "Kuliner",
     lokasi: "MT Haryono, Balikpapan",
@@ -84,12 +97,17 @@ const destinasi = [
     gambar: "/aset/gulung.jpg",
   },
 ];
-// FILTER by kategori
+
+const goToDetail = () => {
+  router.push(`/destinasi/${slug}`);
+};
+
+// filter berdasarkan kategori
 let filtered = props.kategori
   ? destinasi.filter((d) => d.kategori === props.kategori)
   : destinasi;
 
-// LIMIT jumlah card
+// limit jumlah card
 if (props.limit) {
   filtered = filtered.slice(0, props.limit);
 }
@@ -146,12 +164,14 @@ if (props.limit) {
             {{ d.deskripsi }}
           </p>
           <div class="absolute left-0 bottom-4">
-            <Button
-              variant="secondary"
-              content="Lihat Detail"
-              icon="ArrowRight"
-              iconPosition="right"
-            />
+            <RouterLink :to="`/destinasi/${d.slug}`">
+              <Button
+                variant="secondary"
+                content="Lihat Detail"
+                icon="ArrowRight"
+                iconPosition="right"
+              />
+            </RouterLink>
           </div>
         </div>
       </div>

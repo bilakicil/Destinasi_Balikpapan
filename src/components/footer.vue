@@ -27,10 +27,8 @@ import { Facebook } from "lucide-vue-next";
             </h2>
             <ul class="text-body font-medium">
               <li class="mb-4">
-                <a
-                  href="https://tailwindcss.com/"
-                  class="flex items-center gap-3 hover:underline"
-                  ><Phone />+62 542 123 4567</a
+                <a class="flex items-center gap-3 hover:underline"
+                  ><Phone />+62 892 123 4567</a
                 >
               </li>
               <li>
@@ -50,12 +48,16 @@ import { Facebook } from "lucide-vue-next";
             </h2>
             <ul class="text-body font-medium flex items-center gap-7">
               <li>
-                <a href="https://www.instagram.com" class="hover:underline"
+                <a
+                  href="https://www.instagram.com/disporapar_balikpapan?igsh=em93cmMxb2k2b3N3"
+                  class="hover:underline"
                   ><Instagram
                 /></a>
               </li>
               <li>
-                <a href="https://www.facebook.com" class="hover:underline"
+                <a
+                  href="https://www.facebook.com/share/1DPvW22HR2/"
+                  class="hover:underline"
                   ><Facebook
                 /></a>
               </li>

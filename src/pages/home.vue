@@ -1,10 +1,8 @@
 <script setup>
 import Hero from "../components/HeroHome.vue";
 import AboutCard from "../components/AboutCard.vue";
-import Footer from "@/components/Footer.vue";
 import CardDestinasi from "@/components/CardDestinasi.vue";
 import Button from "@/components/Button.vue";
-import { ArrowLeft } from "lucide-vue-next";
 </script>
 
 <template>
@@ -28,10 +26,10 @@ import { ArrowLeft } from "lucide-vue-next";
   </h2>
   <CardDestinasi :limit="3" />
   <div class="text-center mb-20">
-    <Button content="Lihat Semua Destinasi" variant="primary" />
+    <RouterLink to="/destinasi">
+      <Button content="Lihat Semua Destinasi" variant="primary" />
+    </RouterLink>
   </div>
-  <!-- <Button variant="outline" content="Lihat Peta" icon="MapPin" iconPosition="right" /> -->
-  <Footer />
 </template>
 
 <style scoped>
