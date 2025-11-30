@@ -1,129 +1,72 @@
 <script setup>
 import Button from "./Button.vue";
 import { useRouter } from "vue-router";
+import { destinations } from "@/data/destinations";
+import { computed } from "vue";
 
 const router = useRouter();
 
 const props = defineProps({
-  limit: {
-    type: Number,
-    default: null,
+  destinations: {
+    type: Array,
+    default: () => [],
   },
   kategori: {
     type: String,
     default: null,
   },
 });
-const destinasi = [
-  {
-    slug: "pantai-manggar",
-    nama: "Pantai Manggar",
-    kategori: "Pantai",
-    lokasi: "Manggar, Balikpapan",
-    deskripsi:
-      "Nikmati pasir putih dan panorama laut di Pantai Manggar yang dilengkapi berbagai fasilitas modern, mulai dari kuliner lokal hingga olahraga air.",
-    gambar: "/aset/pantai_manggar.jpg",
-  },
-  {
-    slug: "hutan-mangrove",
-    nama: "Hutan Mangrove",
-    kategori: "Wisata Alam",
-    lokasi: "Margomulyo, Balikpapan",
-    deskripsi:
-      "Kawasan konservasi mangrove dengan jembatan kayu yang menawan, tempat terbaik untuk edukasi lingkungan.",
-    gambar: "/aset/hutan_mangrove.png",
-  },
-  {
-    slug: "pasar-tumpah-pringgodani",
-    nama: "Pasar Tumpah Pringgodani",
-    kategori: "Kuliner",
-    lokasi: "Teitip, Balikpapan",
-    deskripsi:
-      "Rasakan sensasi berbelanja kuliner di tengah hutan yang rindang, sebuah pengalaman unik di Pasar Tumpah Pringgodani, Balikpapan Timur.",
-    gambar: "/aset/pringgondani.jpeg",
-  },
-  {
-    slug: "wisata-meranti",
-    nama: "Wisata Meranti ",
-    kategori: "Wisata Alam",
-    lokasi: "Karang Joang, Balikpapan",
-    deskripsi:
-      "Ekowisata Meranti Balikpapan menawarkan perkemahan dan fasilitas modern di tengah upaya pelestarian pohon langka.",
-    gambar: "/aset/wisata_meranti.webp",
-  },
-  {
-    slug: "bukit-kebo",
-    nama: "Bukit Kebo ",
-    kategori: "Wisata Alam",
-    lokasi: "Manggar, Balikpapan",
-    deskripsi:
-      "Berawal dari peternakan, Bukit Kebo kini menjadi destinasi wisata favorit berkat hamparan bukitnya yang luas dan menenangkan.",
-    gambar: "/aset/bukit_kebo.jpeg",
-  },
-  {
-    slug: "pantai-seraya",
-    nama: "Pantai Seraya",
-    kategori: "Pantai",
-    lokasi: "Sepinggan, Balikpapan",
-    deskripsi:
-      "Pantai Sepinggan Raya (Seraya) adalah destinasi di Balikpapan dimana pengunjung dapat menyaksikan pesawat lepas landas dan mendarat dari jarak dekat.",
-    gambar: "/aset/pantai_seraya.jpg",
-  },
-  {
-    slug: "pantai-kilang-mandiri",
-    nama: "Pantai Kilang Mandiri",
-    kategori: "Pantai",
-    lokasi: "Prapatan, Balikpapan",
-    deskripsi:
-      "Pantai Kilang Mandiri menawarkan paviliun bersahabat, kafe Western, dan aktivitas unik seperti berenang malam, tepat di seberang Lapangan Merdeka.",
-    gambar: "/aset/pantai_kilang_mandiri.webp",
-  },
-  {
-    slug: "restoran-dandito",
-    nama: "Restoran Dandito",
-    kategori: "Kuliner",
-    lokasi: "Gn. Bahagia, Balikpapan",
-    deskripsi:
-      "Restoran Dandito adalah ikon kuliner Balikpapan, terkenal dengan olahan kepiting premium, terutama Kepiting Saus Dandito yang legendaris.",
-    gambar: "/aset/dandito.jpeg",
-  },
-  {
-    slug: "gulung-jenebora",
-    nama: "Gulung Jenebora",
-    kategori: "Kuliner",
-    lokasi: "MT Haryono, Balikpapan",
-    deskripsi:
-      "Gulung Jenebora adalah toko oleh-oleh khas Balikpapan spesialis bolu gulung dengan berbagai varian rasa.",
-    gambar: "/aset/gulung.jpg",
-  },
-];
 
-const goToDetail = () => {
+const goToDetail = (slug) => {
+  // Simpan informasi halaman saat ini sebelum navigate
+  const currentPath = window.location.pathname;
+  if (currentPath === "/" || currentPath === "/home") {
+    sessionStorage.setItem("previousPage", "home");
+  } else if (currentPath === "/destinasi") {
+    sessionStorage.setItem("previousPage", "destinasi");
+  }
+
   router.push(`/destinasi/${slug}`);
 };
 
-// filter berdasarkan kategori
-let filtered = props.kategori
-  ? destinasi.filter((d) => d.kategori === props.kategori)
-  : destinasi;
+const filteredDestinations = computed(() => {
+  let filtered = props.destinations.length ? props.destinations : destinations;
 
-// limit jumlah card
-if (props.limit) {
-  filtered = filtered.slice(0, props.limit);
-}
+  if (props.kategori) {
+    const kategorieMap = {
+      alam: ["hutan-mangrove", "wisata-meranti", "bukit-kebo"],
+      pantai: ["pantai-manggar", "pantai-seraya", "pantai-kilang-mandiri"],
+      kuliner: [
+        "pasar-tumpah-pringgodani",
+        "restoran-dandito",
+        "gulung-jenebora",
+      ],
+    };
+
+    if (kategorieMap[props.kategori]) {
+      filtered = destinations.filter((d) =>
+        kategorieMap[props.kategori].includes(d.slug)
+      );
+    }
+  }
+
+  return filtered;
+});
 </script>
 
 <template>
   <section class="pb-20">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl mx-auto">
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 max-w-4xl mx-auto px-6 sm:px-6 lg:px-0"
+    >
       <div
         class="bg-white max-w-lg rounded-2xl shadow-md overflow-hidden relative h-92"
-        v-for="d in filtered"
+        v-for="d in filteredDestinations"
         :key="d.nama"
       >
         <a href="#">
-          <div class="relative">
-            <img class="w-full h-48 object-cover" :src="d.gambar" alt="" />
+          <div class="relative" @click="goToDetail(d.slug)">
+            <img class="w-full h-48 object-cover" :src="d.image" alt="" />
 
             <div
               class="overlay absolute inset-0 bg-black/40 flex flex-col justify-end p-4"
@@ -160,18 +103,17 @@ if (props.limit) {
         </a>
 
         <div class="p-4">
-          <p class="text-gray-600 text-sm mt-1">
-            {{ d.deskripsi }}
+          <p class="line-clamp-4 text-gray-600 text-sm mt-1">
+            {{ d.description }}
           </p>
           <div class="absolute left-0 bottom-4">
-            <RouterLink :to="`/destinasi/${d.slug}`">
-              <Button
-                variant="secondary"
-                content="Lihat Detail"
-                icon="ArrowRight"
-                iconPosition="right"
-              />
-            </RouterLink>
+            <Button
+              variant="secondary"
+              content="Lihat Detail"
+              icon="ArrowRight"
+              iconPosition="right"
+              @click="goToDetail(d.slug)"
+            />
           </div>
         </div>
       </div>

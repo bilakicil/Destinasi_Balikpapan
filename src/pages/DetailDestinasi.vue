@@ -2,13 +2,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { destinations } from "@/data/destinations.js";
 import Button from "@/components/Button.vue";
-import {
-  ArrowLeft,
-  Star,
-  Clock4,
-  CircleDollarSign,
-  MapPin,
-} from "lucide-vue-next";
+import { Star, Clock4, CircleDollarSign, MapPin } from "lucide-vue-next";
 
 const route = useRoute();
 const router = useRouter();
@@ -23,47 +17,78 @@ const infoStructure = [
 // ambil data berdasarkan slug
 const destination = destinations.find((s) => s.slug === slug);
 
-const goBack = () => {
-  router.push("/destinasi");
+const kembali = () => {
+  // cek user dari mana 
+  const previousPage = sessionStorage.getItem("previousPage");
+  console.log("Previous page from storage:", previousPage); 
+
+  if (previousPage === "destinasi") {
+    router.push("/destinasi");
+  } else if (previousPage === "home") {
+    router.push("/");
+  } else {
+    // kalo gk ad data lihat URL skrng di hal mana
+    const currentPath = window.location.pathname;
+    console.log("Current path:", currentPath);
+
+    // kalo ada history ny, balik ke hal sebelumnya
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      router.push("/");
+    }
+  }
+
+  // hps data biar gk ganggu next visit
+  sessionStorage.removeItem("previousPage");
 };
 </script>
 
 <template>
-  <section class="pt-24 max-w-6xl mx-auto" v-if="destination">
-    <div class="mb-6">
+  <section
+    class="pt-20 sm:pt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+    v-if="destination"
+  >
+    <div class="mb-4 sm:mb-6">
       <Button
         variant="outline"
         content="Kembali"
         icon="ArrowLeft"
         iconPosition="left"
-        @click="goBack"
+        @click="kembali"
       />
     </div>
 
     <div class="relative rounded-2xl overflow-hidden shadow-xl">
       <img :src="destination.image" class="w-full h-100 object-cover" />
-      <div class="absolute bottom-4 left-4 text-white">
-        <h2 class="text-5xl font-bold drop-shadow-lg">
+      <div
+        class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white px-2 sm:px-0"
+      >
+        <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold drop-shadow-lg">
           {{ destination.nama }}
         </h2>
-        <p class="text-3xl drop-shadow-lg flex items-center gap-1">
-          <MapPin class="w-8 h-8" />
+        <p
+          class="text-lg sm:text-xl lg:text-3xl drop-shadow-lg flex items-center gap-1"
+        >
+          <MapPin class="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8" />
           {{ destination.lokasi }}
         </p>
       </div>
     </div>
 
-    <div class="mt-8 bg-white p-6 shadow-lg rounded-2xl">
-      <h2 class="text-2xl font-heading font-bold mb-2 text-primary">
+    <div class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 shadow-lg rounded-2xl">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold mb-2 text-primary">
         Tentang Destinasi
       </h2>
-      <p class="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+      <p
+        class="text-sm sm:text-base text-gray-600 leading-relaxed whitespace-pre-line"
+      >
         {{ destination.description }}
       </p>
     </div>
 
-    <div class="mt-8 bg-white p-6 shadow-lg rounded-2xl">
-      <h2 class="text-2xl font-heading font-bold mb-4 text-primary">
+    <div class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 shadow-lg rounded-2xl">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold mb-4 text-primary">
         Highlight
       </h2>
 
@@ -71,7 +96,7 @@ const goBack = () => {
         <div
           v-for="(item, i) in destination.Highlight"
           :key="i"
-          class="bg-blue-50 text-gray-600 px-3 py-2 rounded-lg text-sm flex items-center gap-2"
+          class="bg-blue-50 text-gray-600 px-3 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2"
         >
           <Star style="color: #ffa500" />
           {{ item }}
@@ -79,28 +104,34 @@ const goBack = () => {
       </div>
     </div>
 
-    <div class="mt-8 bg-white p-6 shadow-lg rounded-2xl">
-      <h2 class="text-2xl font-heading font-bold mb-4 text-primary">Lokasi</h2>
+    <div class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 shadow-lg rounded-2xl">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold mb-4 text-primary">
+        Lokasi
+      </h2>
 
       <iframe
         :src="destination.mapEmbed"
         class="w-full rounded-xl"
-        height="350"
+        height="250"
         style="border: 0"
         allowfullscreen
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
 
-      <p class="text-gray-600 mt-3">{{ destination.location }}</p>
+      <p class="text-gray-600 text-sm sm:text-base mt-3">
+        {{ destination.location }}
+      </p>
     </div>
 
-    <div class="mt-8 bg-white p-6 shadow-lg rounded-2xl mb-20">
-      <h2 class="text-2xl font-heading font-bold mb-4 text-primary">
+    <div
+      class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 shadow-lg rounded-2xl mb-12 sm:mb-20"
+    >
+      <h2 class="text-xl sm:text-2xl font-heading font-bold mb-4 text-primary">
         Informasi Praktis
       </h2>
 
-      <ul class="text-sm space-y-4 text-gray-600">
+      <ul class="text-xs sm:text-sm space-y-4 text-gray-600">
         <li class="flex items-center gap-3">
           <Clock4 class="w-5 h-5" style="color: #0077b6" />
 
