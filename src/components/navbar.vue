@@ -1,7 +1,9 @@
 <script setup>
-import { ref } from "vue";
-import { RouterLink } from "vue-router";
+import { ref, computed } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import { Menu } from "lucide-vue-next";
+
+const route = useRoute();
 
 const menus = [
   { name: "Home", link: "/" },
@@ -11,6 +13,11 @@ const menus = [
 ];
 
 const isOpen = ref(false);
+
+// Computed property untuk mengecek apakah di halaman detail destinasi
+const isDestinationDetail = computed(() => {
+  return route.path.startsWith("/destinasi/");
+});
 </script>
 
 <template>
@@ -27,7 +34,12 @@ const isOpen = ref(false);
         <ul>
           <li class="flex gap-10">
             <RouterLink
-              class="text-sm"
+              :class="[
+                'text-sm',
+                menu.name === 'Destinasi' && isDestinationDetail
+                  ? 'text-primary font-semibold'
+                  : '',
+              ]"
               active-class="text-primary"
               exact-active-class="text-primary font-semibold"
               v-for="menu in menus"
@@ -59,7 +71,12 @@ const isOpen = ref(false);
           :key="menu.name"
           :to="menu.link"
           @click="isOpen = false"
-          class="text-gray-700"
+          :class="[
+            'text-gray-700',
+            menu.name === 'Destinasi' && isDestinationDetail
+              ? 'text-primary font-bold'
+              : '',
+          ]"
           active-class="text-primary font-bold"
           exact-active-class="text-primary font-bold"
         >
