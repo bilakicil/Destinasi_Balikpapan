@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 const goToDetail = (slug) => {
-  // Simpan informasi halaman saat ini sebelum navigate
+  // simpan informasi halaman saat ini sebelum navigate
   const currentPath = window.location.pathname;
   if (currentPath === "/" || currentPath === "/home") {
     sessionStorage.setItem("previousPage", "home");

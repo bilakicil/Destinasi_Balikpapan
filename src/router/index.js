@@ -5,6 +5,7 @@ import tentang from "../pages/tentang.vue";
 import destinasi from "../pages/destinasi.vue";
 import DetailDestinasi from "@/pages/DetailDestinasi.vue";
 import kontak from "../pages/kontak.vue";
+import AboutMe from "@/pages/AboutMe.vue";
 
 const routes = [
   { path: "/", name: "home", component: home },
@@ -16,6 +17,7 @@ const routes = [
     component: () => import("../pages/DetailDestinasi.vue"),
   },
   { path: "/kontak", name: "kontak", component: kontak },
+  { path: "/aboutme", name: "aboutme", component: AboutMe}
 ];
 
 export const router = createRouter({

@@ -10,6 +10,7 @@ const menus = [
   { name: "Tentang", link: "/tentang" },
   { name: "Destinasi", link: "/destinasi" },
   { name: "Kontak", link: "/kontak" },
+  { name: "About Me", link: "/aboutme"}
 ];
 
 const isOpen = ref(false);
