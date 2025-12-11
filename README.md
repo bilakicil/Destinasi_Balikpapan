@@ -36,3 +36,12 @@ npm run dev
 ```sh
 npm run build
 ```
+
+File commponen yang di gunakan
+src/component SkillCard.vue 
+
+File halamanan baru
+src/pages/AboutCard.vue 
+
+File yang terlibat
+navbar di tambah about me
